@@ -87,7 +87,7 @@ commerce.get("/orders/user/:userId", OrderController.getOrdersByUser);
 
 
 // port
-const PORT = 7000 || process.env.PORT
+const PORT = process.env.PORT || 7000;
 
 //listen
 commerce.listen(PORT,()=>{
