@@ -25,6 +25,8 @@ const Hero = ({ handleOrderPopup }) => {
         const fetchProducts = () => {
     axios.get(`${import.meta.env.VITE_SERVER_URL}/products`)
       .then(response => {
+        console.log(response);
+        
         setProducts(response.data.products);
       })
       .catch(error => {
