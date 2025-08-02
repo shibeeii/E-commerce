@@ -3,13 +3,14 @@ const Products = require("../Models/ProductModel");
 
 exports.Addproducts = async(req,res)=>{
 
-  const {productname, category,description,price,image}=req.body
+  const {productname, category,description,price,offer,image}=req.body
   // creating product
   const products= await Products.create({
       productname,
       category,
       description,
       price,
+      offer,
       image
   });
 
@@ -17,15 +18,30 @@ exports.Addproducts = async(req,res)=>{
   res.json({products:products})
 }
 
-// get all products
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await Products.find();
-    res.json(products);
+    const limit = parseInt(req.query.limit) || 8;
+    const offset = parseInt(req.query.offset) || 0;
+    const category = req.query.category;
+
+    const filter = {};
+    if (category) {
+      filter.category = category; // Or regex if partial match
+    }
+
+    const products = await Products.find(filter)
+      .skip(offset)
+      .limit(limit);
+
+    const total = await Products.countDocuments(filter);
+
+    res.json({ products, total });
   } catch (err) {
+    console.error("Error in getAllProducts:", err);
     res.status(500).json({ error: "Failed to fetch products" });
   }
-}; 
+};
+
 
 
 // single product
@@ -58,7 +74,7 @@ exports.updateProduct= async(req,res)=>{
 
   // get the data from the reqbdoy
 
-  const {productname, category,description,price,image}=req.body
+  const {productname, category,description,price,offer,image}=req.body
 
   // find and update 
 
@@ -67,6 +83,7 @@ exports.updateProduct= async(req,res)=>{
      category,
      description,
      price,
+     offer,
      image
   });
 
@@ -76,3 +93,26 @@ exports.updateProduct= async(req,res)=>{
 
   res.json({products})
 }
+
+exports.Pagination = async (req, res) => {
+  try {
+    const limit = parseInt(req.query.limit) || 8;
+    const offset = parseInt(req.query.offset) || 0;
+    const category = req.query.category;
+
+    const filter = {};
+    if (category) {
+      filter.category = { $regex: new RegExp(category, "i") }; // Case-insensitive
+    }
+
+    const products = await Products.find(filter)
+      .skip(offset)
+      .limit(limit);
+
+    const total = await Products.countDocuments(filter);
+
+res.json({ products, total });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};

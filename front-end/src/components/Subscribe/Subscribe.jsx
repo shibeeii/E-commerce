@@ -1,5 +1,5 @@
 import React from "react";
-import Banner from "../../assets/website/orange-pattern.jpg";
+import Banner from "../../assets/website/banner2.jpg";
 
 const BannerImg = {
   backgroundImage: `url(${Banner})`,
@@ -26,7 +26,7 @@ const Subscribe = () => {
             data-aos="fade-up"
             type="text"
             placeholder="Enter your email"
-            className="w-full p-3"
+            className="w-full p-3 text-black"
           />
         </div>
       </div>

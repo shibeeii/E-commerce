@@ -108,7 +108,7 @@ const Testimonials = () => {
                       </h1>
                     </div>
                   </div>
-                  <p className="text-black/20 text-9xl font-serif absolute top-0 right-0">
+                  <p className="text-primary text-9xl font-serif absolute top-0 right-0">
                     ,,
                   </p>
                 </div>
