@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 function View() {
-    const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    axios.get(`${ServerUrl}/products/${id}`)
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/products/${id}`)
       .then(res => setProduct(res.data))
       .catch(err => console.error(err));
   }, [id]);

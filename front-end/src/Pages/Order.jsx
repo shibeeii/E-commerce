@@ -6,7 +6,6 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Order = () => {
-    const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
@@ -19,7 +18,7 @@ const Order = () => {
 
   useEffect(() => {
     axios
-      .get(`${ServerUrl}/products/${id}`)
+      .get(`${import.meta.env.VITE_SERVER_URL}/products/${id}`)
       .then((res) => setProduct(res.data))
       .catch((err) => console.error("Error fetching product:", err));
   }, [id]);
@@ -35,7 +34,7 @@ const Order = () => {
     }
 
     try {
-      await axios.post(`${ServerUrl}/cart/add`, {
+      await axios.post(`${import.meta.env.VITE_SERVER_URL}/cart/add`, {
         userId: user._id,
         productId,
         quantity,
@@ -58,7 +57,7 @@ const handleAddToWishlist = async (productId) => {
   }
 
   try {
-    await axios.post(`${ServerUrl}/wishlist/add`, {
+    await axios.post(`${import.meta.env.VITE_SERVER_URL}/wishlist/add`, {
       userId: user._id,
       productId,
     });

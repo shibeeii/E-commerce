@@ -9,7 +9,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const CheckoutPage = () => {
-    const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
@@ -36,7 +35,7 @@ const CheckoutPage = () => {
   const fetchCart = async () => {
     if (!user?._id) return;
     try {
-      const res = await axios.get(`${ServerUrl}/cart/${user._id}`);
+      const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/cart/${user._id}`);
       setCart(res.data.items || []);
       setTotal(res.data.total || 0);
     } catch (err) {
@@ -49,7 +48,7 @@ const CheckoutPage = () => {
 
   const fetchAddresses = async () => {
     try {
-      const res = await axios.get(`${ServerUrl}/address/${user._id}`);
+      const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/address/${user._id}`);
       setAddresses(res.data);
     } catch (err) {
       console.error("Error fetching addresses:", err);
@@ -75,12 +74,12 @@ const CheckoutPage = () => {
     try {
       if (address._id) {
         await axios.put(
-          `${ServerUrl}/address/edit/${user._id}/${address._id}`,
+          `${import.meta.env.VITE_SERVER_URL}/address/edit/${user._id}/${address._id}`,
           address
         );
         toast.success("Address updated successfully!");
       } else {
-        await axios.post(`${ServerUrl}/address/add`, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URL}/address/add`, {
           ...address,
           userId: user._id,
         });
@@ -105,7 +104,7 @@ const CheckoutPage = () => {
 
   const handleRemove = async (productId) => {
     try {
-      await axios.delete(`${ServerUrl}/cart/remove`, {
+      await axios.delete(`${import.meta.env.VITE_SERVER_URL}/cart/remove`, {
         data: {
           userId: user._id,
           productId,
@@ -122,7 +121,7 @@ const CheckoutPage = () => {
   const deleteAddress = async (userId, addressId) => {
     try {
       await axios.delete(
-        `${ServerUrl}/address/delete/${userId}/${addressId}`
+        `${import.meta.env.VITE_SERVER_URL}/address/delete/${userId}/${addressId}`
       );
       fetchAddresses();
       toast.success("Address deleted successfully");
@@ -140,7 +139,7 @@ const CheckoutPage = () => {
 
     try {
       const { data: order } = await axios.post(
-        `${ServerUrl}/api/payment/create-order`,
+        `${import.meta.env.VITE_SERVER_URL}/api/payment/create-order`,
         { amount: total }
       );
 
@@ -154,7 +153,7 @@ const CheckoutPage = () => {
         handler: async function (response) {
           try {
             const verify = await axios.post(
-              `${ServerUrl}/api/payment/verify`,
+              `${import.meta.env.VITE_SERVER_URL}/api/payment/verify`,
               {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,

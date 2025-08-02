@@ -7,7 +7,6 @@ import { FaHeart } from "react-icons/fa";
 
 
 const AllProducts = ({ category }) => {
-    const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
   const [products, setProducts] = useState([]);
   const [searchItem, setSearchItem] = useState("");
@@ -23,7 +22,7 @@ const AllProducts = ({ category }) => {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
-          `${ServerUrl}/products?limit=${limit}&offset=${offset}&category=${category}`
+          `${import.meta.env.VITE_SERVER_URL}/products?limit=${limit}&offset=${offset}&category=${category}`
         );
 
         setProducts(res.data.products);

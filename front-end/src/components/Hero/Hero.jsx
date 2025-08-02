@@ -4,7 +4,6 @@ import axios from "axios";
 
 
 const Hero = ({ handleOrderPopup }) => {
-    const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
       const [products, setProducts] = useState([]);
   var settings = {
@@ -24,7 +23,7 @@ const Hero = ({ handleOrderPopup }) => {
 
   useEffect(() => {
         const fetchProducts = () => {
-    axios.get(`${ServerUrl}/products`)
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/products`)
       .then(response => {
         setProducts(response.data.products);
       })

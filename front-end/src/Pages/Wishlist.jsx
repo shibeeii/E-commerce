@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const WishlistPage = () => {
-    const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
   const [user, setUser] = useState(null);
   const [wishlist, setWishlist] = useState([]);
@@ -18,7 +17,7 @@ const WishlistPage = () => {
     if (!user?._id) return;
     setLoading(true);
     try {
-      const res = await axios.get(`${ServerUrl}/wishlist/${user._id}`);
+      const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/wishlist/${user._id}`);
       const items = res.data.items || [];
       setWishlist(items);
     } catch (err) {
@@ -34,7 +33,7 @@ const WishlistPage = () => {
 
 const handleRemove = async (productId) => {
   try {
-    await axios.delete(`${ServerUrl}/wishlist/remove`, {
+    await axios.delete(`${import.meta.env.VITE_SERVER_URL}/wishlist/remove`, {
       data: {
         userId: user._id,
         productId,

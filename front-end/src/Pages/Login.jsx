@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
-    const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
   const [formData, setFormData] = useState({
     email: "",
@@ -20,7 +19,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(`${ServerUrl}/login`, formData);
+      const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/login`, formData);
       const { token, user } = res.data;
 
       // ✅ Save user and token

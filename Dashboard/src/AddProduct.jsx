@@ -5,7 +5,6 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function AddProduct() {
-  const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
   const [product, setProduct] = useState({
     productname: "",
@@ -55,7 +54,7 @@ function AddProduct() {
     }
 
     axios
-      .post(`${ServerUrl}/products`, product)
+      .post(`${import.meta.env.VITE_SERVER_URL}/products`, product)
       .then((result) => {
         toast.success("Product added successfully!");
         setProduct({

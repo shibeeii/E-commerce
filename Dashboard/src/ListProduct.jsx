@@ -13,9 +13,6 @@ import { BsSearch } from 'react-icons/bs';
 
 
 function ListProduct() {
-    const ServerUrl = import.meta.env.VITE_SERVER_URL;
-
-
     const [products, setProducts] = useState([]);
 
 
@@ -23,7 +20,7 @@ function ListProduct() {
 
   // Fetch all products
   const fetchProducts = () => {
-    axios.get(`${ServerUrl}/products`)
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/products`)
       .then(response => {        
         setProducts(response.data.products);
         // console.log(products);
@@ -49,7 +46,7 @@ function ListProduct() {
   }
 
 const handleDelete = (id) => {
-axios.delete(`${ServerUrl}/products/${id}`)
+axios.delete(`${import.meta.env.VITE_SERVER_URL}/products/${id}`)
     .then(() => {
       toast.success("Product deleted successfully!");
       fetchProducts(); 

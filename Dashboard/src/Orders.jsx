@@ -3,14 +3,13 @@ import axios from "axios";
 import { ServerUrl } from "./ServerUrl";
 
 const Orders = () => {
-    const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get(`${ServerUrl}/orders`);
+      const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/orders`);
       setOrders(res.data);
     } catch (err) {
       console.error("Error fetching orders", err);
@@ -21,7 +20,7 @@ const Orders = () => {
 
   const handleStatusChange = async (orderId, status) => {
     try {
-      await axios.put(`${ServerUrl}/orders/${orderId}/status`, {
+      await axios.put(`${import.meta.env.VITE_SERVER_URL}/orders/${orderId}/status`, {
         status,
       });
       fetchOrders();
