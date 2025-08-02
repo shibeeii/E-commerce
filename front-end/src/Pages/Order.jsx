@@ -4,6 +4,8 @@ import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ServerUrl } from "../../assets/Services";
+
 
 const Order = () => {
   const [quantity, setQuantity] = useState(1);
@@ -17,7 +19,7 @@ const Order = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:7000/products/${id}`)
+      .get(`${ServerUrl}/products/${id}`)
       .then((res) => setProduct(res.data))
       .catch((err) => console.error("Error fetching product:", err));
   }, [id]);
@@ -33,7 +35,7 @@ const Order = () => {
     }
 
     try {
-      await axios.post("http://localhost:7000/cart/add", {
+      await axios.post(`${ServerUrl}/cart/add`, {
         userId: user._id,
         productId,
         quantity,
@@ -56,7 +58,7 @@ const handleAddToWishlist = async (productId) => {
   }
 
   try {
-    await axios.post("http://localhost:7000/wishlist/add", {
+    await axios.post("${ServerUrl}/wishlist/add", {
       userId: user._id,
       productId,
     });

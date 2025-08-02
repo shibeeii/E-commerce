@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { ServerUrl } from "../../assets/Services";
+
 
 const CartPage = () => {
   const [user, setUser] = useState(null);
@@ -21,7 +23,7 @@ const CartPage = () => {
     setLoading(true);
     try {
       console.log("Fetching cart for user:", user._id);
-      const res = await axios.get(`http://localhost:7000/cart/${user._id}`);
+      const res = await axios.get(`${ServerUrl}/cart/${user._id}`);
       console.log("Cart response:", res.data);
 
       const items = res.data.cart?.items || res.data.items || [];
@@ -43,7 +45,7 @@ const CartPage = () => {
   const handleQuantityChange = async (productId, newQty) => {
     if (newQty < 1) return;
     try {
-      await axios.put("http://localhost:7000/cart/update", {
+      await axios.put(`${ServerUrl}/cart/update`, {
         userId: user._id,
         productId,
         quantity: newQty,
@@ -56,7 +58,7 @@ const CartPage = () => {
 
 const handleRemove = async (productId) => {
   try {
-    await axios.delete("http://localhost:7000/cart/remove", {
+    await axios.delete(`${ServerUrl}/cart/remove`, {
       data: {
         userId: user._id,
         productId,
@@ -70,7 +72,7 @@ const handleRemove = async (productId) => {
 
   const handleClearCart = async () => {
     try {
-      await axios.delete(`http://localhost:7000/cart/clear/${user._id}`);
+      await axios.delete(`${ServerUrl}/cart/clear/${user._id}`);
       fetchCart();
     } catch (err) {
       console.error("Failed to clear cart:", err);

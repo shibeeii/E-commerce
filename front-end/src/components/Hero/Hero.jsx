@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import axios from "axios";
+import { ServerUrl } from "../../assets/Services";
 
 
 const Hero = ({ handleOrderPopup }) => {
@@ -22,7 +23,7 @@ const Hero = ({ handleOrderPopup }) => {
 
   useEffect(() => {
         const fetchProducts = () => {
-    axios.get('http://localhost:7000/products')
+    axios.get(`${ServerUrl}/products`)
       .then(response => {
         setProducts(response.data.products);
       })

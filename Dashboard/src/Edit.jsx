@@ -4,6 +4,7 @@ import { Form, Button, Container } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 import { useParams, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import { ServerUrl } from "../../front-end/src/assets/Services";
 
 function Edit() {
   const { id } = useParams();
@@ -23,7 +24,7 @@ function Edit() {
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://localhost:7000/products/${id}`)
+        .get(`${ServerUrl}/products/${id}`)
         .then((res) => {
           setProduct(res.data);
           setLoading(false);
@@ -67,7 +68,7 @@ function Edit() {
     e.preventDefault();
 
     axios
-      .put(`http://localhost:7000/products/${id}`, product)
+      .put(`${ServerUrl}/products/${id}`, product)
       .then(() => {
         toast.success("Product updated successfully!");
         setTimeout(() => navigate("/products"), 2000);

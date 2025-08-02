@@ -7,6 +7,8 @@ import img3 from "../assets/checkout/Paypal.png";
 import img4 from "../assets/checkout/Upi.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ServerUrl } from "../../assets/Services";
+
 
 const CheckoutPage = () => {
   const [user, setUser] = useState(null);
@@ -34,7 +36,7 @@ const CheckoutPage = () => {
   const fetchCart = async () => {
     if (!user?._id) return;
     try {
-      const res = await axios.get(`http://localhost:7000/cart/${user._id}`);
+      const res = await axios.get(`${ServerUrl}/cart/${user._id}`);
       setCart(res.data.items || []);
       setTotal(res.data.total || 0);
     } catch (err) {
@@ -47,7 +49,7 @@ const CheckoutPage = () => {
 
   const fetchAddresses = async () => {
     try {
-      const res = await axios.get(`http://localhost:7000/address/${user._id}`);
+      const res = await axios.get(`${ServerUrl}/address/${user._id}`);
       setAddresses(res.data);
     } catch (err) {
       console.error("Error fetching addresses:", err);
@@ -73,12 +75,12 @@ const CheckoutPage = () => {
     try {
       if (address._id) {
         await axios.put(
-          `http://localhost:7000/address/edit/${user._id}/${address._id}`,
+          `${ServerUrl}/address/edit/${user._id}/${address._id}`,
           address
         );
         toast.success("Address updated successfully!");
       } else {
-        await axios.post("http://localhost:7000/address/add", {
+        await axios.post(`${ServerUrl}/address/add`, {
           ...address,
           userId: user._id,
         });
@@ -103,7 +105,7 @@ const CheckoutPage = () => {
 
   const handleRemove = async (productId) => {
     try {
-      await axios.delete("http://localhost:7000/cart/remove", {
+      await axios.delete(`${ServerUrl}/cart/remove`, {
         data: {
           userId: user._id,
           productId,
@@ -120,7 +122,7 @@ const CheckoutPage = () => {
   const deleteAddress = async (userId, addressId) => {
     try {
       await axios.delete(
-        `http://localhost:7000/address/delete/${userId}/${addressId}`
+        `${ServerUrl}/address/delete/${userId}/${addressId}`
       );
       fetchAddresses();
       toast.success("Address deleted successfully");
@@ -138,7 +140,7 @@ const CheckoutPage = () => {
 
     try {
       const { data: order } = await axios.post(
-        "http://localhost:7000/api/payment/create-order",
+        `${ServerUrl}/api/payment/create-order`,
         { amount: total }
       );
 
@@ -152,7 +154,7 @@ const CheckoutPage = () => {
         handler: async function (response) {
           try {
             const verify = await axios.post(
-              "http://localhost:7000/api/payment/verify",
+              `${ServerUrl}/api/payment/verify`,
               {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,

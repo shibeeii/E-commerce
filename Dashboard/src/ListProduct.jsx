@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BsSearch } from 'react-icons/bs';
+import { ServerUrl } from '../../front-end/src/assets/Services';
 
 
 
@@ -22,7 +23,7 @@ function ListProduct() {
 
   // Fetch all products
   const fetchProducts = () => {
-    axios.get('http://localhost:7000/products')
+    axios.get(`${ServerUrl}/products`)
       .then(response => {        
         setProducts(response.data.products);
         // console.log(products);
@@ -48,7 +49,7 @@ function ListProduct() {
   }
 
 const handleDelete = (id) => {
-axios.delete(`http://localhost:7000/products/${id}`)
+axios.delete(`${ServerUrl}/products/${id}`)
     .then(() => {
       toast.success("Product deleted successfully!");
       fetchProducts(); 

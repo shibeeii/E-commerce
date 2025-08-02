@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { IoMdSearch } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa";
+import { ServerUrl } from "../../assets/Services";
+
 
 const AllProducts = ({ category }) => {
   const [products, setProducts] = useState([]);
@@ -20,7 +22,7 @@ const AllProducts = ({ category }) => {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:7000/products?limit=${limit}&offset=${offset}&category=${category}`
+          `${ServerUrl}/products?limit=${limit}&offset=${offset}&category=${category}`
         );
 
         setProducts(res.data.products);

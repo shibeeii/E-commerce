@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { ServerUrl } from "../../front-end/src/assets/Services";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -7,7 +8,7 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:7000/orders");
+      const res = await axios.get(`${ServerUrl}/orders`);
       setOrders(res.data);
     } catch (err) {
       console.error("Error fetching orders", err);
@@ -18,7 +19,7 @@ const Orders = () => {
 
   const handleStatusChange = async (orderId, status) => {
     try {
-      await axios.put(`http://localhost:7000/orders/${orderId}/status`, {
+      await axios.put(`${ServerUrl}/orders/${orderId}/status`, {
         status,
       });
       fetchOrders();

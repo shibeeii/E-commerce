@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ServerUrl } from "../../front-end/src/assets/Services";
 
 function AddProduct() {
   const [product, setProduct] = useState({
@@ -53,7 +54,7 @@ function AddProduct() {
     }
 
     axios
-      .post("http://localhost:7000/products", product)
+      .post(`${ServerUrl}/products`, product)
       .then((result) => {
         toast.success("Product added successfully!");
         setProduct({

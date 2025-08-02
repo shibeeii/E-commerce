@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { ServerUrl } from "../../assets/Services";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:7000/login", formData);
+      const res = await axios.post(`${ServerUrl}/login`, formData);
       const { token, user } = res.data;
 
       // ✅ Save user and token

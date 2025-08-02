@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { ServerUrl } from "../../assets/Services";
+
 
 const WishlistPage = () => {
   const [user, setUser] = useState(null);
@@ -16,7 +18,7 @@ const WishlistPage = () => {
     if (!user?._id) return;
     setLoading(true);
     try {
-      const res = await axios.get(`http://localhost:7000/wishlist/${user._id}`);
+      const res = await axios.get(`${ServerUrl}/wishlist/${user._id}`);
       const items = res.data.items || [];
       setWishlist(items);
     } catch (err) {
@@ -32,7 +34,7 @@ const WishlistPage = () => {
 
 const handleRemove = async (productId) => {
   try {
-    await axios.delete(`http://localhost:7000/wishlist/remove`, {
+    await axios.delete(`${ServerUrl}/wishlist/remove`, {
       data: {
         userId: user._id,
         productId,

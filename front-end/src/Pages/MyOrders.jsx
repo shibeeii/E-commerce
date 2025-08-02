@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { ServerUrl } from "../../assets/Services";
+
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -7,7 +9,7 @@ const MyOrders = () => {
 
   const fetchUserOrders = async () => {
     try {
-      const res = await axios.get(`http://localhost:7000/orders/user/${userId}`);
+      const res = await axios.get(`${ServerUrl}/orders/user/${userId}`);
       setOrders(res.data);
     } catch (err) {
       console.error("Error fetching user orders", err);
