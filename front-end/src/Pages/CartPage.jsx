@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { ServerUrl } from "../../assets/Services";
-
 
 const CartPage = () => {
+    const ServerUrl = import.meta.env.VITE_SERVER_URL;
+
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);

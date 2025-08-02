@@ -7,10 +7,10 @@ import img3 from "../assets/checkout/Paypal.png";
 import img4 from "../assets/checkout/Upi.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ServerUrl } from "../../assets/Services";
-
 
 const CheckoutPage = () => {
+    const ServerUrl = import.meta.env.VITE_SERVER_URL;
+
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);

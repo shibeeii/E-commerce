@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { ServerUrl } from "../../assets/Services";
-
 
 const MyOrders = () => {
+    const ServerUrl = import.meta.env.VITE_SERVER_URL;
+
   const [orders, setOrders] = useState([]);
   const userId = JSON.parse(localStorage.getItem("user"))?._id;
 

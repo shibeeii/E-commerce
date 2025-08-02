@@ -8,13 +8,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BsSearch } from 'react-icons/bs';
-import { ServerUrl } from '../../front-end/src/assets/Services';
-
 
 
 
 
 function ListProduct() {
+    const ServerUrl = import.meta.env.VITE_SERVER_URL;
+
 
     const [products, setProducts] = useState([]);
 

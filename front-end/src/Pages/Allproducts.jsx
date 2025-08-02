@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import { IoMdSearch } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa";
-import { ServerUrl } from "../../assets/Services";
 
 
 const AllProducts = ({ category }) => {
+    const ServerUrl = import.meta.env.VITE_SERVER_URL;
+
   const [products, setProducts] = useState([]);
   const [searchItem, setSearchItem] = useState("");
   const [sort, setsort] = useState("default");

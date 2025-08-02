@@ -2,10 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import { ServerUrl } from "../../assets/Services";
-
 
 const Register = () => {
+    const ServerUrl = import.meta.env.VITE_SERVER_URL;
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { ServerUrl } from "../../front-end/src/assets/Services";
+import { ServerUrl } from "./ServerUrl";
 
 const Orders = () => {
+    const ServerUrl = import.meta.env.VITE_SERVER_URL;
+
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
 

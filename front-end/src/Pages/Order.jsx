@@ -4,10 +4,10 @@ import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ServerUrl } from "../../assets/Services";
-
 
 const Order = () => {
+    const ServerUrl = import.meta.env.VITE_SERVER_URL;
+
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -58,7 +58,7 @@ const handleAddToWishlist = async (productId) => {
   }
 
   try {
-    await axios.post("${ServerUrl}/wishlist/add", {
+    await axios.post(`${ServerUrl}/wishlist/add`, {
       userId: user._id,
       productId,
     });

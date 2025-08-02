@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import axios from "axios";
-import { ServerUrl } from "../../assets/Services";
 
 
 const Hero = ({ handleOrderPopup }) => {
+    const ServerUrl = import.meta.env.VITE_SERVER_URL;
+
       const [products, setProducts] = useState([]);
   var settings = {
     dots: false,

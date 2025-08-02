@@ -4,9 +4,10 @@ import { Form, Button, Container } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 import { useParams, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { ServerUrl } from "../../front-end/src/assets/Services";
 
 function Edit() {
+    const ServerUrl = import.meta.env.VITE_SERVER_URL;
+
   const { id } = useParams();
   const navigate = useNavigate();
 

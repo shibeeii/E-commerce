@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { ServerUrl } from '../../front-end/src/assets/Services';
-
 function View() {
+    const ServerUrl = import.meta.env.VITE_SERVER_URL;
+
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
