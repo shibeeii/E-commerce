@@ -29,7 +29,10 @@ const OrderController = require("./Controllers/OrderController");
 
 
 // using cors
-commerce.use(cors())
+commerce.use(cors({
+  origin: "https://my-frontend.vercel.app", // allow only this frontend
+  credentials: true,
+}));
 
 // parse the data - middleware - which have the ability to parse the data
 commerce.use(express.json())
