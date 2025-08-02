@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const MyOrders = () => {
-
   const [orders, setOrders] = useState([]);
   const userId = JSON.parse(localStorage.getItem("user"))?._id;
 
   const fetchUserOrders = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/orders/user/${userId}`);
+      const res = await axios.get(`http://localhost:7000/orders/user/${userId}`);
       setOrders(res.data);
     } catch (err) {
       console.error("Error fetching user orders", err);

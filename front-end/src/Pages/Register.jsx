@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
 const Register = () => {
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,7 +19,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/register`, formData);
+      const res = await axios.post("http://localhost:7000/register", formData);
       console.log("Registration successful:", res.data);
       toast.success("Registration successful!");
       setTimeout(() => navigate("/login"), 2000);

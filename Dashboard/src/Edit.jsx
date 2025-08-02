@@ -6,7 +6,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 function Edit() {
-
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -24,7 +23,7 @@ function Edit() {
   useEffect(() => {
     if (id) {
       axios
-        .get(`${import.meta.env.VITE_SERVER_URL}/products/${id}`)
+        .get(`http://localhost:7000/products/${id}`)
         .then((res) => {
           setProduct(res.data);
           setLoading(false);
@@ -68,7 +67,7 @@ function Edit() {
     e.preventDefault();
 
     axios
-      .put(`${import.meta.env.VITE_SERVER_URL}/products/${id}`, product)
+      .put(`http://localhost:7000/products/${id}`, product)
       .then(() => {
         toast.success("Product updated successfully!");
         setTimeout(() => navigate("/products"), 2000);

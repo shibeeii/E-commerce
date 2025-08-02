@@ -22,7 +22,7 @@ function Offerlist() {
 
   // Fetch all products
   const fetchProducts = () => {
-    axios.get(`${import.meta.env.VITE_SERVER_URL}/products`)
+    axios.get('http://localhost:7000/products')
       .then(response => {
         setProducts(response.data.products);
       })
@@ -45,7 +45,7 @@ function Offerlist() {
   }
 
 const handleDelete = (id) => {
-axios.delete(`${import.meta.env.VITE_SERVER_URL}/products/${id}`)
+axios.delete(`http://localhost:7000/products/${id}`)
     .then(() => {
       toast.success("Product deleted successfully!");
       fetchProducts(); 

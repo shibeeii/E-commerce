@@ -5,9 +5,7 @@ import { IoMdSearch } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa";
 
-
 const AllProducts = ({ category }) => {
-
   const [products, setProducts] = useState([]);
   const [searchItem, setSearchItem] = useState("");
   const [sort, setsort] = useState("default");
@@ -22,7 +20,7 @@ const AllProducts = ({ category }) => {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_SERVER_URL}/products?limit=${limit}&offset=${offset}&category=${category}`
+          `http://localhost:7000/products?limit=${limit}&offset=${offset}&category=${category}`
         );
 
         setProducts(res.data.products);

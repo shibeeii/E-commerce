@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const Orders = () => {
-
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/orders`);
+      const res = await axios.get("http://localhost:7000/orders");
       setOrders(res.data);
     } catch (err) {
       console.error("Error fetching orders", err);
@@ -19,7 +18,7 @@ const Orders = () => {
 
   const handleStatusChange = async (orderId, status) => {
     try {
-      await axios.put(`${import.meta.env.VITE_SERVER_URL}/orders/${orderId}/status`, {
+      await axios.put(`http://localhost:7000/orders/${orderId}/status`, {
         status,
       });
       fetchOrders();

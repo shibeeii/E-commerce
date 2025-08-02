@@ -4,7 +4,6 @@ import axios from "axios";
 
 
 const Hero = ({ handleOrderPopup }) => {
-
       const [products, setProducts] = useState([]);
   var settings = {
     dots: false,
@@ -23,10 +22,8 @@ const Hero = ({ handleOrderPopup }) => {
 
   useEffect(() => {
         const fetchProducts = () => {
-    axios.get(`${import.meta.env.VITE_SERVER_URL}/products`)
+    axios.get('http://localhost:7000/products')
       .then(response => {
-        console.log(response);
-        
         setProducts(response.data.products);
       })
       .catch(error => {

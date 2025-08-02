@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,7 +18,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/login`, formData);
+      const res = await axios.post("http://localhost:7000/login", formData);
       const { token, user } = res.data;
 
       // ✅ Save user and token
